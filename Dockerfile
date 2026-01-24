@@ -23,11 +23,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=apt-cache-"$TARGE
 # Allow installing stuff to system Python.
 RUN rm -f /usr/lib/python3.13/EXTERNALLY-MANAGED
 
-# Upgrade pip to latest version.
-RUN pip3 install --upgrade --ignore-installed pip
-
-# Install Ansible via pip.
-RUN pip3 install $pip_packages
+# Upgrade pip to latest version and install Ansible via pip.
+RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked,id=pip-cache-"$TARGETARCH" \
+    pip3 install --upgrade --ignore-installed pip \
+    && pip3 install $pip_packages
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
