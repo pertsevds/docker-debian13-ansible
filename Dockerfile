@@ -1,5 +1,4 @@
-FROM debian:bookworm
-LABEL maintainer="Jeff Geerling"
+FROM debian:trixie
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -17,7 +16,7 @@ RUN apt-get update \
     && apt-get clean
 
 # Allow installing stuff to system Python.
-RUN rm -f /usr/lib/python3.11/EXTERNALLY-MANAGED
+RUN rm -f /usr/lib/python3.13/EXTERNALLY-MANAGED
 
 # Upgrade pip to latest version.
 RUN pip3 install --upgrade pip
