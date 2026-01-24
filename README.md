@@ -1,6 +1,6 @@
 # Debian 13 (Trixie) Ansible Test Image
 
-[![Build](https://github.com/geerlingguy/docker-debian12-ansible/actions/workflows/build.yml/badge.svg)](https://github.com/geerlingguy/docker-debian12-ansible/actions/workflows/build.yml) [![Docker pulls](https://img.shields.io/docker/pulls/geerlingguy/docker-debian12-ansible)](https://hub.docker.com/r/geerlingguy/docker-debian12-ansible/)
+[![Build](https://github.com/pertsevds/docker-debian13-ansible/actions/workflows/build.yml/badge.svg)](https://github.com/pertsevds/docker-debian13-ansible/actions/workflows/build.yml)
 
 Debian 13 (Trixie) Docker container for Ansible playbook and role testing.
 
@@ -10,7 +10,7 @@ Debian 13 (Trixie) Docker container for Ansible playbook and role testing.
 
 ## How to Build
 
-This image is built on Docker Hub automatically any time the upstream OS container is rebuilt, and any time a commit is made or merged to the `master` branch. But if you need to build the image on your own locally, do the following:
+This image is built on Docker Hub automatically any time the upstream OS container is rebuilt, and any time a commit is made or merged to the `main` branch. But if you need to build the image on your own locally, do the following:
 
   1. [Install Docker](https://docs.docker.com/engine/installation/).
   2. `cd` into this directory.
@@ -25,6 +25,6 @@ This image is built on Docker Hub automatically any time the upstream OS contain
     a. `docker exec --tty [container_id] env TERM=xterm ansible --version`
     b. `docker exec --tty [container_id] env TERM=xterm ansible-playbook /path/to/ansible/playbook.yml --syntax-check`
 
-## 
+## Notes
 
 This is a fork of https://github.com/geerlingguy/docker-debian12-ansible/
