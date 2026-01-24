@@ -20,23 +20,20 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=apt-cache-"$TARGE
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man
 
-# Allow installing stuff to system Python.
-RUN rm -f /usr/lib/python3.13/EXTERNALLY-MANAGED
-
-# Upgrade pip to latest version and install Ansible via pip.
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked,id=pip-cache-"$TARGETARCH" \
-    pip3 install --upgrade --ignore-installed pip \
+    # Allow installing stuff to system Python.
+    rm -f /usr/lib/python3.13/EXTERNALLY-MANAGED \
+    # Upgrade pip to latest version and install Ansible via pip.
+    && pip3 install --upgrade --ignore-installed pip \
     && pip3 install $pip_packages
 
 COPY initctl_faker .
-RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
-
-# Install Ansible inventory file.
-RUN mkdir -p /etc/ansible
-RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
-
-# Make sure systemd doesn't start agettys on tty[1-6].
-RUN rm -f /lib/systemd/system/multi-user.target.wants/getty.target
+RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+    # Install Ansible inventory file.
+    && mkdir -p /etc/ansible \
+    && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
+    # Make sure systemd doesn't start agettys on tty[1-6].
+    && rm -f /lib/systemd/system/multi-user.target.wants/getty.target
 
 VOLUME ["/sys/fs/cgroup"]
 CMD ["/lib/systemd/systemd"]
