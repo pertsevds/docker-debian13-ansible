@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=apt-cache-"$TARGE
 
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked,id=pip-cache-"$TARGETARCH" \
     # Allow installing stuff to system Python.
-    rm -f /usr/lib/python3.13/EXTERNALLY-MANAGED \
+    rm -f /usr/lib/python3*/EXTERNALLY-MANAGED \
     # Upgrade pip to latest version and install Ansible via pip.
     && pip3 install --upgrade --ignore-installed pip \
     && pip3 install $pip_packages
