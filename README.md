@@ -32,10 +32,12 @@ driver:
   name: docker
 
 platforms:
-  - name: Debian 13
+  - name: debian-13
     image: "ghcr.io/pertsevds/docker-debian13-ansible:latest"
     pre_build_image: true
     privileged: true
+    command: /lib/systemd/systemd
+    cgroupns_mode: host
     tmpfs:
       - /tmp
       - /run
