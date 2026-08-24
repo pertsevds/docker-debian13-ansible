@@ -18,7 +18,7 @@ This image is built on Docker Hub automatically any time the upstream OS contain
 
   1. [Install Docker](https://docs.docker.com/engine/installation/).
   2. `cd` into this directory.
-  3. Run `docker build -t debian13-ansible .`
+  3. Run `docker build -t 'ghcr.io/pertsevds/docker-debian13-ansible' .`
 
 ## How to Use
 
@@ -49,12 +49,15 @@ platforms:
   or
   
   1. [Install Docker](https://docs.docker.com/engine/installation/).
-  2. Pull this image from Docker Hub: `docker pull ghcr.io/pertsevds/docker-debian13-ansible:latest` (or use the image you built earlier, e.g. `debian13-ansible`).
-  3. Run a container from the image: `docker run --detach --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host ghcr.io/pertsevds/docker-debian13-ansible:latest` (to test my Ansible roles, I add in a volume mounted from the current working directory with ``--volume=`pwd`:/etc/ansible/roles/role_under_test:ro``).
-  4. Use Ansible inside the container:
-    a. `docker exec --tty [container_id] env TERM=xterm ansible --version`
-    b. `docker exec --tty [container_id] env TERM=xterm ansible-playbook /path/to/ansible/playbook.yml --syntax-check`
+  2. Pull this image from Docker Hub:  
+    `docker pull ghcr.io/pertsevds/docker-debian13-ansible:latest`  
+    or use the image you built earlier.
+  3. Run a container from the image:  
+    `docker run --detach --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host ghcr.io/pertsevds/docker-debian13-ansible:latest` (to test my Ansible roles, I add in a volume mounted from the current working directory with ``--volume=`pwd`:/etc/ansible/roles/role_under_test:ro``).
+  4. Use Ansible inside the container:  
+    `docker exec --tty [container_id] env TERM=xterm ansible --version`  
+    `docker exec --tty [container_id] env TERM=xterm ansible-playbook /path/to/ansible/playbook.yml --syntax-check`
 
 ## Notes
 
-This is a fork of https://github.com/geerlingguy/docker-debian12-ansible/
+This is an updated fork of https://github.com/geerlingguy/docker-debian12-ansible/
