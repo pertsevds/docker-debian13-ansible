@@ -1,0 +1,16 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    name: Delete old test images
+    steps:
+      - uses: snok/container-retention-policy@v3.1.0
+        with:
+          account: pertsevds
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image-names: "docker-debian13-ansible"
+          tag-selection: untagged
+          cut-off: 1month
+          dry-run: true
