@@ -3,6 +3,8 @@ name: GHCR image retention
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "12 2 * * 0"
 
 jobs:
   clean:
