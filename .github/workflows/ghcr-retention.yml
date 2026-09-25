@@ -1,6 +1,10 @@
 ---
 name: GHCR image retention
 
+permissions:
+  contents: read
+  packages: write
+
 on:
   workflow_dispatch:
 
