@@ -8,15 +8,10 @@ jobs:
   clean:
     runs-on: ubuntu-latest
     name: Delete >1month old untagged images
-    permissions:
-      contents: read
-      packages: write
     steps:
-      - uses: snok/container-retention-policy@v3.1.0
+      - name: Cleanup registry
+        uses: actions/delete-package-versions@v5
         with:
-          account: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          image-names: "docker-debian13-ansible"
-          tag-selection: untagged
-          cut-off: 1month
-          dry-run: true
+          package-name: ${{ github.event.repository.name }}
+          package-type: container
+          delete-only-untagged-versions: true
