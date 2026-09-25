@@ -1,21 +1,20 @@
 ---
 name: GHCR image retention
 
-permissions:
-  contents: read
-  packages: write
-
 on:
   workflow_dispatch:
 
 jobs:
   clean:
     runs-on: ubuntu-latest
-    name: Delete old test images
+    name: Delete >1month old untagged images
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: snok/container-retention-policy@v3.1.0
         with:
-          account: pertsevds
+          account: ${{ github.actor }}
           token: ${{ secrets.GITHUB_TOKEN }}
           image-names: "docker-debian13-ansible"
           tag-selection: untagged
