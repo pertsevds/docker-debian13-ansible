@@ -1,3 +1,6 @@
+---
+name: GHCR image retention
+
 on:
   workflow_dispatch:
 
