@@ -12,9 +12,9 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: snok/container-retention-policy@v3.1.0
+      - uses: snok/container-retention-policy@v3
         with:
-          account: ${{ github.actor }}
+          account: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
           image-names: "docker-debian13-ansible"
           tag-selection: untagged
